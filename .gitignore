@@ -1,0 +1,5 @@
+﻿.terraform
+.idea
+app/dbdata/*
+terraform.tfstate
+terraform.tfstate.backup
