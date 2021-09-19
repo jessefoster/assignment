@@ -1,0 +1,29 @@
+steps:
+# Build frontend
+- name: node
+  entrypoint: npm
+  dir: 'app/assignment-ui'
+  args: ['install']
+
+- name: node
+  entrypoint: npm
+  dir: 'app/assignment-ui'
+  args: ['run', 'build']
+
+# Deploy frontend static files with backend service
+- name: 'bash'
+  args: ['cp', '-vr', 'app/assignment-ui/build/.', 'app/assignment/src/main/resources/META-INF/resources/']
+
+- name: 'bash'
+  args: ['ls', 'app/assignment/src/main/resources/META-INF/resources/']
+
+- name: maven:3.8.2-openjdk-11
+  entrypoint: mvn
+  dir: 'app/assignment'
+  args: ['package']
+
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'app/assignment'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/assignment-jvm-$BUILD_ID', '-f', 'src/main/docker/Dockerfile.jvm', '.']
+
+images: ['gcr.io/$PROJECT_ID/assignment-jvm-$BUILD_ID']

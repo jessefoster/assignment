@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
+const REST_URL = process.env.REACT_APP_BACKEND_HOST + '/helloworld'
+
 class HelloWorld extends React.Component {
 
     constructor(props) {
@@ -30,7 +32,7 @@ class HelloWorld extends React.Component {
 
     submitPost(message) {
         const body = JSON.stringify({ message: message });
-        const promise = fetch("http://localhost:8080/helloworld", {
+        const promise = fetch(REST_URL, {
             method: "POST",
             body: body,
             headers: {

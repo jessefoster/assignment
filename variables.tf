@@ -16,3 +16,8 @@ variable "project_id" {
     type = string
     default = "idme-assignment"
 }
+
+variable "region" {
+    type = string
+    default = "us-west1"
+}

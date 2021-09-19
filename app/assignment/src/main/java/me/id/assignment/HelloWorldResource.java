@@ -36,4 +36,10 @@ public class HelloWorldResource {
 
 		return hello.get();
 	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public HelloWorld get() {
+		return HelloWorld.builder().message("Test Hello World").build();
+	}
 }

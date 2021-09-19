@@ -1,26 +1,27 @@
-quarkus:
-  http:
-    cors: true
-  hibernate-orm:
-    dialect: PostgreSQL10Dialect
-  datasource:
-    db-kind: other
-    # ${HOST:localhost} change out passwords via env variables?
-    username: "hello_world_sa"
-    password: "PThQEEh4"
-    jdbc:
-      url: jdbc:postgresql:///helloworld
-      driver: org.postgresql.Driver
-      additional-jdbc-properties:
-        cloudSqlInstance: "project-id:gcp-region:instance:"
-        socketFactory: "com.google.cloud.sql.postgres.SocketFactory"
+"%prod":
+  quarkus:
+    http:
+      cors: true
+    hibernate-orm:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    datasource:
+      db-kind: other
+      # ${HOST:localhost} change out passwords via env variables?
+      username: "hello_world_sa"
+      password: "PThQEEh4"
+      jdbc:
+        url: jdbc:postgresql:///helloworld
+        driver: org.postgresql.Driver
+        additional-jdbc-properties:
+          cloudSqlInstance: "idme-assignment:us-west1:hello-world-db-a829a434"
+          socketFactory: "com.google.cloud.sql.postgres.SocketFactory"
 
 # With Profiles
 "%dev":
   quarkus:
     http:
-      cors: true
-      origins: localhost:3000, localhost:8080
+      cors:
+        origins: localhost:3000, localhost:8080
     hibernate-orm:
       database:
         generation: "drop-and-create"
